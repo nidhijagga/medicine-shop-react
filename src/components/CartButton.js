@@ -1,8 +1,9 @@
 import React, {useContext, useState} from "react";
 import Cart from "./Cart";
+import { CartContext } from "../store/cartContext";
 const CartButton = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
-  // const cartContext = useContext(CartContext);
+  const cartContext = useContext(CartContext);
 
   // Function to open the cart
   const openCart = () => {
@@ -21,7 +22,7 @@ const CartButton = () => {
       >
         <button>🛒 Cart</button>
         <span className="text-md bg-teal-900 rounded-md px-2 ">
-          0
+          {cartContext.cartItems.length}
         </span>
       </div>
       {<Cart isOpen={isCartOpen} onClose={closeCart} />}

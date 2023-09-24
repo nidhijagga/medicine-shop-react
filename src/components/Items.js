@@ -1,13 +1,12 @@
 import React, {useContext, useState} from "react";
-import { medicineData } from "./Constants";
 import Card from "./Card";
 import Input from "./Input";
 import { CartContext } from "../store/cartContext";
-
+import { medDataContext } from "../store/medDataContext";
 const Items = () => {
   const [quantityInput, setQuantityInput] = useState("1");
   const cartContext = useContext(CartContext);
-
+  const medContext = useContext(medDataContext);
   const handleQuantityChange = (event) => {
     setQuantityInput(event.target.value);
   };
@@ -27,7 +26,7 @@ const Items = () => {
 
   return (
     <div className="grid grid-cols-1">
-      {medicineData.map((med) => (
+      {medContext.medItems.map((med) => (
         <Card
           key={med.id}
           className="bg-white hover:shadow-lg hover:bg-gray-100 transition duration-300"

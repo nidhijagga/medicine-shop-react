@@ -43,19 +43,19 @@ const Cart = ({ isOpen, onClose }) => {
                   <div className="text-gray-600 w-1/5 flex items-center">
                     <button
                       onClick={() => decreaseQuantity(item)}
-                      className="px-2 py-1 bg-red-900 text-white rounded-md hover:bg-red-600"
+                      className="px-2 py-1 bg-teal-900 text-white rounded-md hover:bg-teal-600"
                     >
                       -
                     </button>
                     <span className="px-2">{item.quantity}</span>
                     <button
                       onClick={() => increaseQuantity(item)}
-                      className="px-2 py-1 bg-red-900 text-white rounded-md hover:bg-red-600"
+                      className="px-2 py-1 bg-teal-900 text-white rounded-md hover:bg-teal-600"
                     >
                       +
                     </button>
                   </div>
-                  <span className="text-red-500 w-2/5 text-right">
+                  <span className="text-teal-500 w-2/5 text-right">
                     Rs. {item.price * item.quantity}
                   </span>
                 </li>
@@ -67,13 +67,13 @@ const Cart = ({ isOpen, onClose }) => {
             <div className="flex justify-end mt-4">
               <button
                 onClick={onClose}
-                className="bg-red-900 text-white py-2 px-4 mr-3 rounded-full"
+                className="bg-teal-900 text-white py-2 px-4 mr-3 rounded-full"
               >
                 Close Cart
               </button>
               <button
                 onClick={onClose}
-                className="bg-red-900 text-white py-2 px-4 rounded-full"
+                className="bg-teal-900 text-white py-2 px-4 rounded-full"
               >
                 Order
               </button>

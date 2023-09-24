@@ -23,9 +23,13 @@ const Form = () => {
       name : name,
       description: description ,
       price  : parseInt(price),
-      quantity : quantity
+      quantityLeft : quantity
     }
-    medContext.setMedItems((previousItems)=> [...previousItems, data])
+    medContext.setMedItems((previousItems)=> [data, ...previousItems])
+    setName("");
+    setDescription("");
+    setPrice("");
+    setQuantity("");
   }
 
   const handleSubmit = (event) => {
