@@ -1,8 +1,10 @@
-import React, {useContext} from "react";
-import  {CartContext}  from "../store/cartContext";
+import React, { useContext } from "react";
+import { CartContext } from "../store/cartContext";
+import { medDataContext } from "../store/medDataContext";
 const Cart = ({ isOpen, onClose }) => {
   const cartContext = useContext(CartContext);
   const cartItems = cartContext.cartItems;
+  const medContext = useContext(medDataContext);
 
   const getTotalPrice = () => {
     return cartItems.reduce(
@@ -34,6 +36,7 @@ const Cart = ({ isOpen, onClose }) => {
               Your Cart
             </h2>
             <ul>
+              {console.log(cartItems)}
               {cartItems.map((item) => (
                 <li
                   key={item.id}
@@ -42,14 +45,20 @@ const Cart = ({ isOpen, onClose }) => {
                   <span className="font-semibold w-2/5">{item.name}</span>
                   <div className="text-gray-600 w-1/5 flex items-center">
                     <button
-                      onClick={() => decreaseQuantity(item)}
+                      onClick={() => {
+                        decreaseQuantity(item);
+                        medContext.updateQuantity(item.id, 1, "add");
+                      }}
                       className="px-2 py-1 bg-teal-900 text-white rounded-md hover:bg-teal-600"
                     >
                       -
                     </button>
                     <span className="px-2">{item.quantity}</span>
                     <button
-                      onClick={() => increaseQuantity(item)}
+                      onClick={() => {
+                        increaseQuantity(item);
+                        medContext.updateQuantity(item.id, 1, "minus");
+                      }}
                       className="px-2 py-1 bg-teal-900 text-white rounded-md hover:bg-teal-600"
                     >
                       +

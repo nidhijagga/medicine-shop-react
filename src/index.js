@@ -8,13 +8,13 @@ import { MedDataProvider } from "./store/medDataContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <CartProvider>
-    <MedDataProvider>
+  <MedDataProvider>
+    <CartProvider>
       <React.StrictMode>
         <App />
       </React.StrictMode>
-    </MedDataProvider>
-  </CartProvider>
+    </CartProvider>
+  </MedDataProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

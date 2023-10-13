@@ -25,7 +25,7 @@ const Form = () => {
       price  : parseInt(price),
       quantityLeft : quantity
     }
-    medContext.setMedItems((previousItems)=> [data, ...previousItems])
+    medContext.addMedData(data);
     setName("");
     setDescription("");
     setPrice("");

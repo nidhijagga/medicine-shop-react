@@ -1,8 +1,10 @@
-import React, {useContext, useState} from "react";
+import React, { useContext, useState, useEffect } from "react";
 import Card from "./Card";
 import Input from "./Input";
 import { CartContext } from "../store/cartContext";
 import { medDataContext } from "../store/medDataContext";
+import axios from "axios";
+
 const Items = () => {
   const [quantityInput, setQuantityInput] = useState("1");
   const cartContext = useContext(CartContext);
@@ -24,6 +26,22 @@ const Items = () => {
     ]);
   };
 
+  useEffect(() => {
+    const fetchMedData = async () => {
+      try {
+        const res = await axios.get(
+          "https://crudcrud.com/api/84b6489fa9fb478995262a41fd7c6827/medData"
+        );
+        medContext.setMedItems(res.data);
+        console.log(res.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchMedData();
+  }, []);
+
   return (
     <div className="grid grid-cols-1">
       {medContext.medItems.map((med) => (
@@ -43,7 +61,10 @@ const Items = () => {
                 <li className="text-md font-semibold text-teal-500">
                   Rs. {med.price}
                 </li>
-                <li className="text-sm text-teal-950"> Quantity Available : {med.quantityLeft}</li>
+                <li className="text-sm text-teal-950">
+                  {" "}
+                  Quantity Available : {med.quantityLeft}
+                </li>
               </ul>
             </div>
             <div className="flex items-center justify-end">
@@ -55,7 +76,7 @@ const Items = () => {
                       id: "amount",
                       type: "number",
                       min: "1",
-                      max : med.quantityLeft,
+                      max: med.quantityLeft,
                       step: "1",
                       value: quantityInput,
                       onChange: handleQuantityChange,
@@ -69,6 +90,8 @@ const Items = () => {
                   onClick={(e) => {
                     e.preventDefault();
                     addToCart(med);
+                    medContext.updateQuantity(med.id, quantityInput, "minus");
+                    // console.log(medContext.medItems)
                   }}
                 >
                   + Add
